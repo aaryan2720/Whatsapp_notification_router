@@ -1,0 +1,27 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+
+# Runtime logs (generated, not source)
+src/logs/*.log
+code/logs/*.log
+
+# Runtime cache artifacts
+src/cache/**/*.json
+code/cache/**/*.json
+
+# Runtime outputs (not the final submission output.csv)
+src/outputs/
+
+# Environment files
+.env
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
