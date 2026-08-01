@@ -69,14 +69,14 @@ def main() -> int:
         print(f"[FATAL] {exc}", file=sys.stderr)
         return 1
 
-    # TODO (Module 12): import and run src.pipeline.run_batch.run()
-    from src.utils.logging_utils import get_logger
-    logger = get_logger(__name__)
-    logger.info(
-        "Pipeline entry point ready. "
-        "Full batch runner will be wired in Module 12."
-    )
-    return 0
+    # Run the full batch pipeline runner
+    from src.pipeline.run_batch import run
+    
+    # Pass dataset_dir and output overrides if provided
+    dataset_dir = os.path.abspath(args.dataset_dir) if args.dataset_dir else None
+    output_path = os.path.abspath(args.output) if args.output else None
+
+    return run(dataset_dir=dataset_dir, output_path=output_path)
 
 
 if __name__ == "__main__":

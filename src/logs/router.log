@@ -40,3 +40,622 @@
 2026-08-01T23:19:15 [ERROR] src.bootstrap — Missing required dataset file: C:\Users\aarya\AppData\Local\Temp\pytest-of-Aaryan27\pytest-18\test_bootstrap_missing_file_st0\nonexistent.csv
 2026-08-01T23:19:15 [ERROR] src.bootstrap — Missing required dataset file: C:\Users\aarya\AppData\Local\Temp\pytest-of-Aaryan27\pytest-18\test_bootstrap_missing_file_no0\nonexistent.csv
 2026-08-01T23:19:15 [WARNING] src.bootstrap — Non-strict mode: 1 missing dataset file(s) tolerated.
+2026-08-01T23:39:05 [INFO] root — Logging initialised | level=INFO | file=D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\src\logs\router.log
+2026-08-01T23:39:05 [INFO] src.bootstrap — ============================================================
+2026-08-01T23:39:05 [INFO] src.bootstrap — Message Notification Router — startup
+2026-08-01T23:39:05 [INFO] src.bootstrap —   env        : development
+2026-08-01T23:39:05 [INFO] src.bootstrap —   repo_root  : D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main
+2026-08-01T23:39:05 [INFO] src.bootstrap —   dataset    : D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset
+2026-08-01T23:39:05 [INFO] src.bootstrap —   python     : 3.11.9
+2026-08-01T23:39:05 [INFO] src.bootstrap —   strict     : True
+2026-08-01T23:39:05 [INFO] src.bootstrap —   features   : ocr=True  asr=True  retrieval=True  personalization=True
+2026-08-01T23:39:05 [INFO] src.bootstrap — ============================================================
+2026-08-01T23:39:05 [INFO] src.bootstrap — Creating runtime directories...
+2026-08-01T23:39:05 [INFO] src.bootstrap — Runtime directories ready.
+2026-08-01T23:39:05 [INFO] src.bootstrap — Validating dataset files...
+2026-08-01T23:39:05 [INFO] src.bootstrap — All required dataset files present.
+2026-08-01T23:39:05 [INFO] src.bootstrap — Output template found: D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset\output.csv
+2026-08-01T23:39:05 [INFO] src.bootstrap — Bootstrap complete.
+2026-08-01T23:39:05 [INFO] src.pipeline.run_batch — Starting Message Routing pipeline batch run.
+2026-08-01T23:39:05 [INFO] src.loader.csv_loader — Loading all datasets (strict=D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset) ...
+2026-08-01T23:39:05 [INFO] src.loader.csv_loader — Datasets loaded: 110 messages, 54 users, 23 groups, 110 businesses, 412 history, 412 events
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_023
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_091
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_090
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_048
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_040
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_075
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_005
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_104
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_069
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_107
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_070
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_003
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_099
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_008
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_092
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_012
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_060
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_004
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_030
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_045
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_052
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_009
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_071
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_016
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_010
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_065
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_038
+2026-08-01T23:39:05 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_009
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_086
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_014
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_094
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_029
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_105
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_002
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_010
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_078
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_013
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_018
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_044
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_032
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_106
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_006
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_109
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_108
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_019
+2026-08-01T23:39:05 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_012
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_088
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_056
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_003
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_027
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_050
+2026-08-01T23:39:05 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_006
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_083
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_063
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_033
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_061
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_020
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_017
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_058
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_026
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_047
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_046
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_042
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_079
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_098
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_037
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_007
+2026-08-01T23:39:05 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_008
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_085
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_001
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_021
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_003
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_028
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_012
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_002
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_064
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_103
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_004
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_031
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_057
+2026-08-01T23:39:05 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_014
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_087
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_067
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_039
+2026-08-01T23:39:05 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_005
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_082
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_010
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_066
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_007
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_049
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_015
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_051
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_097
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_089
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_024
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_053
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_059
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_024
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_072
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_036
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_076
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_055
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_102
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_080
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_093
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_034
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_035
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_101
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_041
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_011
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_110
+2026-08-01T23:39:05 [INFO] src.routing.scorer — Routing message: msg_095
+2026-08-01T23:39:05 [INFO] src.multimodal.image_pipeline — Processing message image: img_025
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_074
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_073
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_054
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_068
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_100
+2026-08-01T23:39:06 [INFO] src.multimodal.image_pipeline — Processing message image: img_023
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_062
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_096
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_043
+2026-08-01T23:39:06 [INFO] src.multimodal.image_pipeline — Processing message image: img_011
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_077
+2026-08-01T23:39:06 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_004
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_081
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_025
+2026-08-01T23:39:06 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_007
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_084
+2026-08-01T23:39:06 [INFO] src.routing.scorer — Routing message: msg_022
+2026-08-01T23:39:06 [INFO] src.pipeline.run_batch — Writing 110 predictions to D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset\output.csv
+2026-08-01T23:39:06 [ERROR] src.pipeline.run_batch — Submission validation failed: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>
+2026-08-01T23:39:23 [INFO] root — Logging initialised | level=INFO | file=D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\src\logs\router.log
+2026-08-01T23:39:23 [INFO] src.bootstrap — ============================================================
+2026-08-01T23:39:23 [INFO] src.bootstrap — Message Notification Router — startup
+2026-08-01T23:39:23 [INFO] src.bootstrap —   env        : development
+2026-08-01T23:39:23 [INFO] src.bootstrap —   repo_root  : D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main
+2026-08-01T23:39:23 [INFO] src.bootstrap —   dataset    : D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset
+2026-08-01T23:39:23 [INFO] src.bootstrap —   python     : 3.11.9
+2026-08-01T23:39:23 [INFO] src.bootstrap —   strict     : True
+2026-08-01T23:39:23 [INFO] src.bootstrap —   features   : ocr=True  asr=True  retrieval=True  personalization=True
+2026-08-01T23:39:23 [INFO] src.bootstrap — ============================================================
+2026-08-01T23:39:23 [INFO] src.bootstrap — Creating runtime directories...
+2026-08-01T23:39:23 [INFO] src.bootstrap — Runtime directories ready.
+2026-08-01T23:39:23 [INFO] src.bootstrap — Validating dataset files...
+2026-08-01T23:39:23 [INFO] src.bootstrap — All required dataset files present.
+2026-08-01T23:39:23 [INFO] src.bootstrap — Output template found: D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset\output.csv
+2026-08-01T23:39:23 [INFO] src.bootstrap — Bootstrap complete.
+2026-08-01T23:39:23 [INFO] src.pipeline.run_batch — Starting Message Routing pipeline batch run.
+2026-08-01T23:39:23 [INFO] src.loader.csv_loader — Loading all datasets (strict=D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset) ...
+2026-08-01T23:39:23 [INFO] src.loader.csv_loader — Datasets loaded: 110 messages, 54 users, 23 groups, 110 businesses, 412 history, 412 events
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_023
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_091
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_090
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_048
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_040
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_075
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_005
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_104
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_069
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_107
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_070
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_003
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_099
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_008
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_092
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_012
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_060
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_004
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_030
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_045
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_052
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_009
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_071
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_016
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_010
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_065
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_038
+2026-08-01T23:39:23 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_009
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_086
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_014
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_094
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_029
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_105
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_002
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_010
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_078
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_013
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_018
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_044
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_032
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_106
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_006
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_109
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_108
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_019
+2026-08-01T23:39:23 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_012
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_088
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_056
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_003
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_027
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_050
+2026-08-01T23:39:23 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_006
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_083
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_063
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_033
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_061
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_020
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_017
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_058
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_026
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_047
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_046
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_042
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_079
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_098
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_037
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_007
+2026-08-01T23:39:23 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_008
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_085
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_001
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_021
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_003
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_028
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_012
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_002
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_064
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_103
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_004
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_031
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_057
+2026-08-01T23:39:23 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_014
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_087
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_067
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_039
+2026-08-01T23:39:23 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_005
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_082
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_010
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_066
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_007
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_049
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_015
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_051
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_097
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_089
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_024
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_053
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_059
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_024
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_072
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_036
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_076
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_055
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_102
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_080
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_093
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_034
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_035
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_101
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_041
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_011
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_110
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_095
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_025
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_074
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_073
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_054
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_068
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_100
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_023
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_062
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_096
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_043
+2026-08-01T23:39:23 [INFO] src.multimodal.image_pipeline — Processing message image: img_011
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_077
+2026-08-01T23:39:23 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_004
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_081
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_025
+2026-08-01T23:39:23 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_007
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_084
+2026-08-01T23:39:23 [INFO] src.routing.scorer — Routing message: msg_022
+2026-08-01T23:39:23 [INFO] src.pipeline.run_batch — Writing 110 predictions to D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset\output.csv
+2026-08-01T23:39:23 [INFO] src.pipeline.run_batch — Message Routing pipeline batch run completed successfully. output.csv is ready.
+2026-08-01T23:39:50 [INFO] root — Logging initialised | level=INFO | file=D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\src\logs\router.log
+2026-08-01T23:39:50 [INFO] src.bootstrap — ============================================================
+2026-08-01T23:39:50 [INFO] src.bootstrap — Message Notification Router — startup
+2026-08-01T23:39:50 [INFO] src.bootstrap —   env        : development
+2026-08-01T23:39:50 [INFO] src.bootstrap —   repo_root  : D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main
+2026-08-01T23:39:50 [INFO] src.bootstrap —   dataset    : D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset
+2026-08-01T23:39:50 [INFO] src.bootstrap —   python     : 3.11.9
+2026-08-01T23:39:50 [INFO] src.bootstrap —   strict     : True
+2026-08-01T23:39:50 [INFO] src.bootstrap —   features   : ocr=True  asr=True  retrieval=True  personalization=True
+2026-08-01T23:39:50 [INFO] src.bootstrap — ============================================================
+2026-08-01T23:39:50 [INFO] src.bootstrap — Creating runtime directories...
+2026-08-01T23:39:50 [INFO] src.bootstrap — Runtime directories ready.
+2026-08-01T23:39:50 [INFO] src.bootstrap — Validating dataset files...
+2026-08-01T23:39:50 [INFO] src.bootstrap — All required dataset files present.
+2026-08-01T23:39:50 [INFO] src.bootstrap — Output template found: D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset\output.csv
+2026-08-01T23:39:50 [INFO] src.bootstrap — Bootstrap complete.
+2026-08-01T23:39:50 [INFO] src.pipeline.run_batch — Starting Message Routing pipeline batch run.
+2026-08-01T23:39:50 [INFO] src.loader.csv_loader — Loading all datasets (strict=D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset) ...
+2026-08-01T23:39:50 [INFO] src.loader.csv_loader — Datasets loaded: 110 messages, 54 users, 23 groups, 110 businesses, 412 history, 412 events
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_023
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_091
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_090
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_048
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_040
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_075
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_005
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_104
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_069
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_107
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_070
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_003
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_099
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_008
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_092
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_012
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_060
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_004
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_030
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_045
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_052
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_009
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_071
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_016
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_010
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_065
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_038
+2026-08-01T23:39:50 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_009
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_086
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_014
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_094
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_029
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_105
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_002
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_010
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_078
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_013
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_018
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_044
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_032
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_106
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_006
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_109
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_108
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_019
+2026-08-01T23:39:50 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_012
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_088
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_056
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_003
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_027
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_050
+2026-08-01T23:39:50 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_006
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_083
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_063
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_033
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_061
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_020
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_017
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_058
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_026
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_047
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_046
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_042
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_079
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_098
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_037
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_007
+2026-08-01T23:39:50 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_008
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_085
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_001
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_021
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_003
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_028
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_012
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_002
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_064
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_103
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_004
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_031
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_057
+2026-08-01T23:39:50 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_014
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_087
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_067
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_039
+2026-08-01T23:39:50 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_005
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_082
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_010
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_066
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_007
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_049
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_015
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_051
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_097
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_089
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_024
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_053
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_059
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_024
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_072
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_036
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_076
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_055
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_102
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_080
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_093
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_034
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_035
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_101
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_041
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_011
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_110
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_095
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_025
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_074
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_073
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_054
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_068
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_100
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_023
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_062
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_096
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_043
+2026-08-01T23:39:50 [INFO] src.multimodal.image_pipeline — Processing message image: img_011
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_077
+2026-08-01T23:39:50 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_004
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_081
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_025
+2026-08-01T23:39:50 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_007
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_084
+2026-08-01T23:39:50 [INFO] src.routing.scorer — Routing message: msg_022
+2026-08-01T23:39:50 [INFO] src.pipeline.run_batch — Writing 110 predictions to D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset\output.csv
+2026-08-01T23:39:50 [INFO] src.pipeline.run_batch — Message Routing pipeline batch run completed successfully. output.csv is ready.
+2026-08-01T23:39:59 [INFO] root — Logging initialised | level=INFO | file=D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\src\logs\router.log
+2026-08-01T23:39:59 [INFO] src.bootstrap — ============================================================
+2026-08-01T23:39:59 [INFO] src.bootstrap — Message Notification Router — startup
+2026-08-01T23:39:59 [INFO] src.bootstrap —   env        : development
+2026-08-01T23:39:59 [INFO] src.bootstrap —   repo_root  : D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main
+2026-08-01T23:39:59 [INFO] src.bootstrap —   dataset    : D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset
+2026-08-01T23:39:59 [INFO] src.bootstrap —   python     : 3.11.9
+2026-08-01T23:39:59 [INFO] src.bootstrap —   strict     : True
+2026-08-01T23:39:59 [INFO] src.bootstrap —   features   : ocr=True  asr=True  retrieval=True  personalization=True
+2026-08-01T23:39:59 [INFO] src.bootstrap — ============================================================
+2026-08-01T23:39:59 [INFO] src.bootstrap — Creating runtime directories...
+2026-08-01T23:39:59 [INFO] src.bootstrap — Runtime directories ready.
+2026-08-01T23:39:59 [INFO] src.bootstrap — Validating dataset files...
+2026-08-01T23:39:59 [INFO] src.bootstrap — All required dataset files present.
+2026-08-01T23:39:59 [INFO] src.bootstrap — Output template found: D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset\output.csv
+2026-08-01T23:39:59 [INFO] src.bootstrap — Bootstrap complete.
+2026-08-01T23:39:59 [INFO] src.pipeline.run_batch — Starting Message Routing pipeline batch run.
+2026-08-01T23:39:59 [INFO] src.loader.csv_loader — Loading all datasets (strict=D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset) ...
+2026-08-01T23:39:59 [INFO] src.loader.csv_loader — Datasets loaded: 110 messages, 54 users, 23 groups, 110 businesses, 412 history, 412 events
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_023
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_091
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_090
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_048
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_040
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_075
+2026-08-01T23:39:59 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_005
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_104
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_069
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_107
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_070
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_003
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_099
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_008
+2026-08-01T23:39:59 [INFO] src.routing.scorer — Routing message: msg_092
+2026-08-01T23:39:59 [INFO] src.multimodal.image_pipeline — Processing message image: img_012
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_060
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_004
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_030
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_045
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_052
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_009
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_071
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_016
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_010
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_065
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_038
+2026-08-01T23:40:00 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_009
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_086
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_014
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_094
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_008
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_029
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_105
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_002
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_010
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_078
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_013
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_018
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_044
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_032
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_106
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_006
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_109
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_108
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_019
+2026-08-01T23:40:00 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_012
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_088
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_056
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_003
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_027
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_050
+2026-08-01T23:40:00 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_006
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_083
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_063
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_033
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_061
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_020
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_017
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_058
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_026
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_047
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_046
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_042
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_079
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_098
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_037
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_007
+2026-08-01T23:40:00 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_008
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_085
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_001
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_021
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_003
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_028
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_012
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_002
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_064
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_103
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_004
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_031
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_057
+2026-08-01T23:40:00 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_014
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_087
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_067
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_039
+2026-08-01T23:40:00 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_005
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_082
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_010
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_066
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_007
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_049
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_015
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_051
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_097
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_089
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_024
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_053
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_059
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_024
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_072
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_036
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_076
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_055
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_102
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_080
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_093
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_034
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_035
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_101
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_041
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_011
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_110
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_095
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_025
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_074
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_073
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_054
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_068
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_100
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_023
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_062
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_096
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_043
+2026-08-01T23:40:00 [INFO] src.multimodal.image_pipeline — Processing message image: img_011
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_077
+2026-08-01T23:40:00 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_004
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_081
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_025
+2026-08-01T23:40:00 [INFO] src.multimodal.voice_pipeline — Processing message voice note: vn_007
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_084
+2026-08-01T23:40:00 [INFO] src.routing.scorer — Routing message: msg_022
+2026-08-01T23:40:00 [INFO] src.pipeline.run_batch — Writing 110 predictions to D:\Documents\orchestrate_august2026\hackerrank-orchestrate-august26-main\dataset\output.csv
+2026-08-01T23:40:00 [INFO] src.pipeline.run_batch — Message Routing pipeline batch run completed successfully. output.csv is ready.
+2026-08-01T23:40:00 [ERROR] src.bootstrap — Missing required dataset file: C:\Users\aarya\AppData\Local\Temp\pytest-of-Aaryan27\pytest-20\test_bootstrap_missing_file_st0\nonexistent.csv
+2026-08-01T23:40:00 [ERROR] src.bootstrap — Missing required dataset file: C:\Users\aarya\AppData\Local\Temp\pytest-of-Aaryan27\pytest-20\test_bootstrap_missing_file_no0\nonexistent.csv
+2026-08-01T23:40:00 [WARNING] src.bootstrap — Non-strict mode: 1 missing dataset file(s) tolerated.
