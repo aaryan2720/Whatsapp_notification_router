@@ -17,6 +17,7 @@ from src.models.context import (  # noqa: F401
     ConversationContext,
     RoutingFeatures,
     TextFeatures,
+    ImageFeatures,
 )
 from src.models.evidence import EvidenceRecord, EvidenceBundle  # noqa: F401
 from src.models.prediction import DecisionExplanation, Prediction  # noqa: F401

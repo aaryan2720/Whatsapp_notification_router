@@ -325,6 +325,57 @@ class TextFeatures:
 
 
 @dataclass(frozen=True, slots=True)
+class ImageFeatures:
+    """
+    Extracted visual and structure markers from images.
+    Used by downstream scorer to weigh text and visual contexts.
+    """
+
+    image_id: str = ""
+    is_poster: bool = False
+    is_screenshot: bool = False
+    is_receipt: bool = False
+    is_document: bool = False
+    is_qr_code: bool = False
+    is_photograph: bool = False
+    text_ratio: float = 0.0  # dominant text/image ratio estimate
+    image_complexity: str = "low"  # "low", "medium", "high"
+    ocr_quality_estimate: float = 1.0
+    visual_confidence: float = 1.0
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "image_id": self.image_id,
+            "is_poster": self.is_poster,
+            "is_screenshot": self.is_screenshot,
+            "is_receipt": self.is_receipt,
+            "is_document": self.is_document,
+            "is_qr_code": self.is_qr_code,
+            "is_photograph": self.is_photograph,
+            "text_ratio": self.text_ratio,
+            "image_complexity": self.image_complexity,
+            "ocr_quality_estimate": self.ocr_quality_estimate,
+            "visual_confidence": self.visual_confidence,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> ImageFeatures:
+        return cls(
+            image_id=data.get("image_id", ""),
+            is_poster=data.get("is_poster", False),
+            is_screenshot=data.get("is_screenshot", False),
+            is_receipt=data.get("is_receipt", False),
+            is_document=data.get("is_document", False),
+            is_qr_code=data.get("is_qr_code", False),
+            is_photograph=data.get("is_photograph", False),
+            text_ratio=data.get("text_ratio", 0.0),
+            image_complexity=data.get("image_complexity", "low"),
+            ocr_quality_estimate=data.get("ocr_quality_estimate", 1.0),
+            visual_confidence=data.get("visual_confidence", 1.0),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class RoutingFeatures:
     """
     Complete bundle of computed features passed into the Routing Decision Engine.
@@ -346,6 +397,7 @@ class RoutingFeatures:
     historical_dismiss_rate: float = 0.0
     historical_report_rate: float = 0.0
     text_features: TextFeatures | None = None
+    image_features: ImageFeatures | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -363,12 +415,17 @@ class RoutingFeatures:
             "historical_dismiss_rate": self.historical_dismiss_rate,
             "historical_report_rate": self.historical_report_rate,
             "text_features": self.text_features.to_dict() if self.text_features else None,
+            "image_features": self.image_features.to_dict() if self.image_features else None,
         }
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> RoutingFeatures:
         tf_data = data.get("text_features")
         tf = TextFeatures.from_dict(tf_data) if tf_data else None
+        
+        im_data = data.get("image_features")
+        im = ImageFeatures.from_dict(im_data) if im_data else None
+
         return cls(
             message=MessageRecord.from_row(data["message"]),
             user=UserContext.from_dict(data["user"]),
@@ -384,4 +441,5 @@ class RoutingFeatures:
             historical_dismiss_rate=data.get("historical_dismiss_rate", 0.0),
             historical_report_rate=data.get("historical_report_rate", 0.0),
             text_features=tf,
+            image_features=im,
         )
