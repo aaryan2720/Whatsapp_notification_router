@@ -26,4 +26,5 @@ from src.models.prediction import (  # noqa: F401
     Prediction,
     DecisionScores,
     DecisionTrace,
+    ReasonFragments,
 )

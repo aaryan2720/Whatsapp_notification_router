@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import math
 from typing import Any
-from src.models import RoutingFeatures, DecisionScores, DecisionTrace, Prediction
+from src.models import RoutingFeatures, DecisionScores, DecisionTrace, Prediction, ReasonFragments
 from src.routing.decision_rules import evaluate_decision_matrix
 from src.routing import thresholds as T
 from src.utils.logging_utils import get_logger
@@ -260,7 +260,35 @@ def route_message(features: RoutingFeatures, bundle: Any = None) -> Prediction:
     # 3. Calibrate confidence
     confidence = calculate_confidence(features, scores, action, overrides)
 
-    # 4. Create Decision Trace for debugging
+    # 4. Create ReasonFragments
+    is_payment = (features.text_features and features.text_features.is_payment_indicated) or False
+    media_lower = (features.ocr_text + " " + features.asr_transcript).lower()
+    has_otp = (
+        (features.text_features and features.text_features.has_otp_pattern)
+        or "otp" in media_lower
+    )
+    is_promo_text = (features.text_features and features.text_features.is_promotion) or False
+    is_promo_img = (features.image_features and features.image_features.is_poster) or False
+    is_promo_voice = "offer" in media_lower or "sale" in media_lower
+    promo_detected = is_promo_text or is_promo_img or is_promo_voice
+
+    fragments = ReasonFragments(
+        verified_business=features.conversation.business_verified,
+        trusted_sender=features.conversation.sender_trust >= T.TRUST_HIGH,
+        payment_due=is_payment,
+        otp_detected=has_otp,
+        recent_similar_message=len(features.matched_evidence_ids) > 0,
+        user_usually_opens=features.historical_open_rate >= 0.60,
+        promotion_detected=promo_detected,
+        phishing_detected=scores.scam_score >= T.SCAM_HIGH or features.conversation.phishing_probability >= T.PHISHING_HIGH,
+        muted_group=features.conversation.group_muted_by_user if features.conversation.conversation_type == "group" else False,
+        quiet_hours=scores.quiet_hours_score > 0.5,
+        multimodal_agreement=features.has_valid_media and (is_promo_text == is_promo_img),
+        strong_historical_evidence=features.historical_open_rate >= 0.70 or features.historical_reply_rate >= 0.40,
+        weak_evidence=len(features.matched_evidence_ids) == 0,
+    )
+
+    # 5. Create Decision Trace for debugging
     contributions = {
         "urgency": scores.urgency_score,
         "relationship": scores.relationship_score,
@@ -281,8 +309,6 @@ def route_message(features: RoutingFeatures, bundle: Any = None) -> Prediction:
         final_reasoning_path=reason_path,
     )
 
-    # Note: reason text rendering is left as a placeholder for Module 11 to populate,
-    # but we store the reason path here to support execution.
     return Prediction(
         message_id=features.message.message_id,
         action=action,
@@ -292,4 +318,5 @@ def route_message(features: RoutingFeatures, bundle: Any = None) -> Prediction:
         evidence_message_ids=features.matched_evidence_ids,
         decision_scores=scores,
         decision_trace=trace,
+        reason_fragments=fragments,
     )

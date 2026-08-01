@@ -128,6 +128,63 @@ class DecisionTrace:
 
 
 @dataclass(frozen=True, slots=True)
+class ReasonFragments:
+    """
+    Structured key-value flags summarizing rule and context contributions.
+    Passed from scoring layer to explainability layer without re-running routing logic.
+    """
+
+    verified_business: bool = False
+    trusted_sender: bool = False
+    payment_due: bool = False
+    otp_detected: bool = False
+    recent_similar_message: bool = False
+    user_usually_opens: bool = False
+    promotion_detected: bool = False
+    phishing_detected: bool = False
+    muted_group: bool = False
+    quiet_hours: bool = False
+    multimodal_agreement: bool = False
+    strong_historical_evidence: bool = False
+    weak_evidence: bool = False
+
+    def to_dict(self) -> dict[str, bool]:
+        return {
+            "verified_business": self.verified_business,
+            "trusted_sender": self.trusted_sender,
+            "payment_due": self.payment_due,
+            "otp_detected": self.otp_detected,
+            "recent_similar_message": self.recent_similar_message,
+            "user_usually_opens": self.user_usually_opens,
+            "promotion_detected": self.promotion_detected,
+            "phishing_detected": self.phishing_detected,
+            "muted_group": self.muted_group,
+            "quiet_hours": self.quiet_hours,
+            "multimodal_agreement": self.multimodal_agreement,
+            "strong_historical_evidence": self.strong_historical_evidence,
+            "weak_evidence": self.weak_evidence,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> ReasonFragments:
+        return cls(
+            verified_business=data.get("verified_business", False),
+            trusted_sender=data.get("trusted_sender", False),
+            payment_due=data.get("payment_due", False),
+            otp_detected=data.get("otp_detected", False),
+            recent_similar_message=data.get("recent_similar_message", False),
+            user_usually_opens=data.get("user_usually_opens", False),
+            promotion_detected=data.get("promotion_detected", False),
+            phishing_detected=data.get("phishing_detected", False),
+            muted_group=data.get("muted_group", False),
+            quiet_hours=data.get("quiet_hours", False),
+            multimodal_agreement=data.get("multimodal_agreement", False),
+            strong_historical_evidence=data.get("strong_historical_evidence", False),
+            weak_evidence=data.get("weak_evidence", False),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class Prediction:
     """
     Canonical representation of a single message routing prediction.
@@ -143,6 +200,7 @@ class Prediction:
     evidence_message_ids: tuple[str, ...] = field(default_factory=tuple)
     decision_scores: DecisionScores | None = None
     decision_trace: DecisionTrace | None = None
+    reason_fragments: ReasonFragments | None = None
 
     def to_csv_row(self) -> dict[str, str]:
         """
@@ -173,6 +231,7 @@ class Prediction:
             "evidence_message_ids": list(self.evidence_message_ids),
             "decision_scores": self.decision_scores.to_dict() if self.decision_scores else None,
             "decision_trace": self.decision_trace.to_dict() if self.decision_trace else None,
+            "reason_fragments": self.reason_fragments.to_dict() if self.reason_fragments else None,
         }
 
     @classmethod
@@ -184,6 +243,9 @@ class Prediction:
         dt_data = data.get("decision_trace")
         dt = DecisionTrace.from_dict(dt_data) if dt_data else None
 
+        rf_data = data.get("reason_fragments")
+        rf = ReasonFragments.from_dict(rf_data) if rf_data else None
+
         return cls(
             message_id=data["message_id"],
             action=data["action"],
@@ -193,4 +255,5 @@ class Prediction:
             evidence_message_ids=tuple(data.get("evidence_message_ids", [])),
             decision_scores=ds,
             decision_trace=dt,
+            reason_fragments=rf,
         )
