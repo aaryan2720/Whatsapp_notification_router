@@ -38,6 +38,96 @@ class DecisionExplanation:
 
 
 @dataclass(frozen=True, slots=True)
+class DecisionScores:
+    """
+    Independent scores produced by every major feature family.
+    Used for explainability, debugging, and calibration.
+    """
+
+    urgency_score: float = 0.0
+    relationship_score: float = 0.0
+    trust_score: float = 0.0
+    business_score: float = 0.0
+    promotion_score: float = 0.0
+    spam_score: float = 0.0
+    scam_score: float = 0.0
+    evidence_score: float = 0.0
+    multimodal_score: float = 0.0
+    conversation_score: float = 0.0
+    personalization_score: float = 0.0
+    notification_fatigue_score: float = 0.0
+    quiet_hours_score: float = 0.0
+    final_priority_score: float = 0.0
+
+    def to_dict(self) -> dict[str, float]:
+        return {
+            "urgency_score": self.urgency_score,
+            "relationship_score": self.relationship_score,
+            "trust_score": self.trust_score,
+            "business_score": self.business_score,
+            "promotion_score": self.promotion_score,
+            "spam_score": self.spam_score,
+            "scam_score": self.scam_score,
+            "evidence_score": self.evidence_score,
+            "multimodal_score": self.multimodal_score,
+            "conversation_score": self.conversation_score,
+            "personalization_score": self.personalization_score,
+            "notification_fatigue_score": self.notification_fatigue_score,
+            "quiet_hours_score": self.quiet_hours_score,
+            "final_priority_score": self.final_priority_score,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> DecisionScores:
+        return cls(
+            urgency_score=float(data.get("urgency_score", 0.0)),
+            relationship_score=float(data.get("relationship_score", 0.0)),
+            trust_score=float(data.get("trust_score", 0.0)),
+            business_score=float(data.get("business_score", 0.0)),
+            promotion_score=float(data.get("promotion_score", 0.0)),
+            spam_score=float(data.get("spam_score", 0.0)),
+            scam_score=float(data.get("scam_score", 0.0)),
+            evidence_score=float(data.get("evidence_score", 0.0)),
+            multimodal_score=float(data.get("multimodal_score", 0.0)),
+            conversation_score=float(data.get("conversation_score", 0.0)),
+            personalization_score=float(data.get("personalization_score", 0.0)),
+            notification_fatigue_score=float(data.get("notification_fatigue_score", 0.0)),
+            quiet_hours_score=float(data.get("quiet_hours_score", 0.0)),
+            final_priority_score=float(data.get("final_priority_score", 0.0)),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class DecisionTrace:
+    """
+    Trace logs of intermediate rule inputs, threshold crossings, and final reasoning.
+    Used for reproducibility and inspection.
+    """
+
+    contributions: dict[str, float] = field(default_factory=dict)
+    rule_overrides: list[str] = field(default_factory=list)
+    thresholds_crossed: list[str] = field(default_factory=list)
+    final_reasoning_path: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "contributions": self.contributions,
+            "rule_overrides": self.rule_overrides,
+            "thresholds_crossed": self.thresholds_crossed,
+            "final_reasoning_path": self.final_reasoning_path,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> DecisionTrace:
+        return cls(
+            contributions=dict(data.get("contributions", {})),
+            rule_overrides=list(data.get("rule_overrides", [])),
+            thresholds_crossed=list(data.get("thresholds_crossed", [])),
+            final_reasoning_path=data.get("final_reasoning_path", ""),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class Prediction:
     """
     Canonical representation of a single message routing prediction.
@@ -51,6 +141,8 @@ class Prediction:
     reason: str
     confidence: float
     evidence_message_ids: tuple[str, ...] = field(default_factory=tuple)
+    decision_scores: DecisionScores | None = None
+    decision_trace: DecisionTrace | None = None
 
     def to_csv_row(self) -> dict[str, str]:
         """
@@ -79,11 +171,19 @@ class Prediction:
             "reason": self.reason,
             "confidence": self.confidence,
             "evidence_message_ids": list(self.evidence_message_ids),
+            "decision_scores": self.decision_scores.to_dict() if self.decision_scores else None,
+            "decision_trace": self.decision_trace.to_dict() if self.decision_trace else None,
         }
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> Prediction:
         """Deserialize from generic dict representation."""
+        ds_data = data.get("decision_scores")
+        ds = DecisionScores.from_dict(ds_data) if ds_data else None
+
+        dt_data = data.get("decision_trace")
+        dt = DecisionTrace.from_dict(dt_data) if dt_data else None
+
         return cls(
             message_id=data["message_id"],
             action=data["action"],
@@ -91,4 +191,6 @@ class Prediction:
             reason=data["reason"],
             confidence=float(data["confidence"]),
             evidence_message_ids=tuple(data.get("evidence_message_ids", [])),
+            decision_scores=ds,
+            decision_trace=dt,
         )
