@@ -9,3 +9,4 @@ Re-exports:
 
 from src.context.user_context import build_user_context  # noqa: F401
 from src.context.user_aggregates import compute_user_historical_rates  # noqa: F401
+from src.context.conversation_context import build_conversation_context  # noqa: F401

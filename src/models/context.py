@@ -163,6 +163,13 @@ class ConversationContext:
     # Personal sender details
     sender_user_id: str = ""
 
+    # Precomputed behavioral/trust metrics (populated by context builder)
+    sender_trust: float = 0.5
+    relationship_strength: float = 0.0
+    group_activity_score: float = 0.0
+    phishing_probability: float = 0.0
+    priority_hint: str = "normal"  # "urgent", "normal", "low"
+
     @property
     def is_group_admin(self) -> bool:
         return self.user_role_in_group == "admin"
@@ -207,6 +214,11 @@ class ConversationContext:
             "ubh_messages_dismissed_30d": self.ubh_messages_dismissed_30d,
             "ubh_messages_replied_30d": self.ubh_messages_replied_30d,
             "sender_user_id": self.sender_user_id,
+            "sender_trust": self.sender_trust,
+            "relationship_strength": self.relationship_strength,
+            "group_activity_score": self.group_activity_score,
+            "phishing_probability": self.phishing_probability,
+            "priority_hint": self.priority_hint,
         }
 
     @classmethod
@@ -241,6 +253,11 @@ class ConversationContext:
             ubh_messages_dismissed_30d=data.get("ubh_messages_dismissed_30d", 0),
             ubh_messages_replied_30d=data.get("ubh_messages_replied_30d", 0),
             sender_user_id=data.get("sender_user_id", ""),
+            sender_trust=data.get("sender_trust", 0.5),
+            relationship_strength=data.get("relationship_strength", 0.0),
+            group_activity_score=data.get("group_activity_score", 0.0),
+            phishing_probability=data.get("phishing_probability", 0.0),
+            priority_hint=data.get("priority_hint", "normal"),
         )
 
 
