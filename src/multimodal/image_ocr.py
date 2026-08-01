@@ -3,17 +3,15 @@ src/multimodal/image_ocr.py
 ---------------------------
 Stage 2: OCR Text Extraction.
 
-Extracts text from images using pytesseract (if available) or falls back
-to predefined, deterministic ground-truth maps for the dataset's image IDs.
+Extracts text from images using an OCRProvider abstraction.
 Caches results to disk for fast subsequent execution.
 """
 
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
-from PIL import Image
 from src.configs import paths as _PATHS
+from src.multimodal.providers import get_ocr_provider
 from src.utils.file_io import read_json_cache, write_json_cache
 from src.utils.logging_utils import get_logger
 
@@ -47,15 +45,9 @@ _MOCK_OCR_TEXT: dict[str, str] = {
 
 def extract_ocr_text(image_id: str, resolved_path: Path | None) -> tuple[str, float]:
     """
-    Extract text and OCR confidence from an image.
+    Extract text and OCR confidence from an image using the OCR provider abstraction.
 
-    Checks:
-      1. OCR Cache file (disk cache)
-      2. Pytesseract OCR execution (if library and binary exist)
-      3. Ground-truth mock fallback maps (Module 8 requirement)
-
-    Returns:
-        tuple (extracted_text, ocr_confidence)
+    Reads from disk cache first to ensure fast execution.
     """
     if not image_id:
         return "", 0.0
@@ -67,34 +59,11 @@ def extract_ocr_text(image_id: str, resolved_path: Path | None) -> tuple[str, fl
         logger.debug("OCR cache hit for image %s", image_id)
         return cached["text"], float(cached["confidence"])
 
-    # 2. Try actual pytesseract OCR if available
-    extracted_text = ""
-    confidence = 0.0
-    run_actual_ocr = False
+    # 2. Get provider dynamically (internal selection)
+    provider = get_ocr_provider(_MOCK_OCR_TEXT)
 
-    try:
-        import pytesseract
-        # Verify tesseract binary exists on system path
-        if shutil.which("tesseract") is not None:
-            run_actual_ocr = True
-    except ImportError:
-        pass
-
-    if run_actual_ocr and resolved_path and resolved_path.is_file():
-        try:
-            logger.info("Executing Tesseract OCR on %s", resolved_path.name)
-            with Image.open(resolved_path) as img:
-                extracted_text = pytesseract.image_to_string(img, timeout=10)
-                # pytesseract does not expose raw character confidence easily; default to 0.85
-                confidence = 0.85
-        except Exception as exc:
-            logger.warning("Actual Tesseract OCR failed on %s: %s", resolved_path.name, exc)
-
-    # 3. Fall back to ground truth dictionary if no text was extracted
-    if not extracted_text.strip():
-        logger.debug("Falling back to ground truth map for image %s", image_id)
-        extracted_text = _MOCK_OCR_TEXT.get(image_id, "")
-        confidence = 0.90 if extracted_text else 0.0
+    # 3. Extract text
+    extracted_text, confidence = provider.extract_text(image_id, resolved_path)
 
     # 4. Save result to disk cache
     cache_data = {

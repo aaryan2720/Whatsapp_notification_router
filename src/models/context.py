@@ -376,6 +376,48 @@ class ImageFeatures:
 
 
 @dataclass(frozen=True, slots=True)
+class VoiceFeatures:
+    """
+    Extracted transcription and acoustic markers from voice notes.
+    Used by downstream scorer to weigh speech intent.
+    """
+
+    voice_note_id: str = ""
+    transcript: str = ""
+    transcript_confidence: float = 0.0
+    audio_duration: float = 0.0
+    speech_detected: bool = False
+    silence_detected: bool = False
+    processing_fallback_used: bool = False
+    language: str = "en"
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "voice_note_id": self.voice_note_id,
+            "transcript": self.transcript,
+            "transcript_confidence": self.transcript_confidence,
+            "audio_duration": self.audio_duration,
+            "speech_detected": self.speech_detected,
+            "silence_detected": self.silence_detected,
+            "processing_fallback_used": self.processing_fallback_used,
+            "language": self.language,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> VoiceFeatures:
+        return cls(
+            voice_note_id=data.get("voice_note_id", ""),
+            transcript=data.get("transcript", ""),
+            transcript_confidence=float(data.get("transcript_confidence", 0.0)),
+            audio_duration=float(data.get("audio_duration", 0.0)),
+            speech_detected=data.get("speech_detected", False),
+            silence_detected=data.get("silence_detected", False),
+            processing_fallback_used=data.get("processing_fallback_used", False),
+            language=data.get("language", "en"),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class RoutingFeatures:
     """
     Complete bundle of computed features passed into the Routing Decision Engine.
@@ -398,6 +440,7 @@ class RoutingFeatures:
     historical_report_rate: float = 0.0
     text_features: TextFeatures | None = None
     image_features: ImageFeatures | None = None
+    voice_features: VoiceFeatures | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -416,6 +459,7 @@ class RoutingFeatures:
             "historical_report_rate": self.historical_report_rate,
             "text_features": self.text_features.to_dict() if self.text_features else None,
             "image_features": self.image_features.to_dict() if self.image_features else None,
+            "voice_features": self.voice_features.to_dict() if self.voice_features else None,
         }
 
     @classmethod
@@ -425,6 +469,9 @@ class RoutingFeatures:
         
         im_data = data.get("image_features")
         im = ImageFeatures.from_dict(im_data) if im_data else None
+
+        vf_data = data.get("voice_features")
+        vf = VoiceFeatures.from_dict(vf_data) if vf_data else None
 
         return cls(
             message=MessageRecord.from_row(data["message"]),
@@ -442,4 +489,5 @@ class RoutingFeatures:
             historical_report_rate=data.get("historical_report_rate", 0.0),
             text_features=tf,
             image_features=im,
+            voice_features=vf,
         )
