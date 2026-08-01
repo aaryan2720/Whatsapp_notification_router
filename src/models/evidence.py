@@ -9,7 +9,7 @@ evidence candidate.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 
@@ -47,4 +47,44 @@ class EvidenceRecord:
             matching_criteria=data["matching_criteria"],
             created_at=created_dt,
             message_text=data.get("message_text", ""),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class EvidenceBundle:
+    """
+    Holds the complete set of ranked evidence for a message,
+    allowing downstream modules (like routing and explanation engines)
+    to consume features without performing queries.
+    """
+
+    ranked_evidence: tuple[EvidenceRecord, ...]
+    ranking_scores: dict[str, float] = field(default_factory=dict)
+    retrieval_metadata: dict[str, Any] = field(default_factory=dict)
+    retrieval_confidence: float = 0.0
+    retrieval_explanation: dict[str, str] = field(default_factory=dict)
+
+    @property
+    def evidence_ids(self) -> tuple[str, ...]:
+        """Convenience property returning just the message IDs of the evidence."""
+        return tuple(ev.message_id for ev in self.ranked_evidence)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "ranked_evidence": [ev.to_dict() for ev in self.ranked_evidence],
+            "ranking_scores": self.ranking_scores,
+            "retrieval_metadata": self.retrieval_metadata,
+            "retrieval_confidence": self.retrieval_confidence,
+            "retrieval_explanation": self.retrieval_explanation,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> EvidenceBundle:
+        ev_list = [EvidenceRecord.from_dict(d) for d in data.get("ranked_evidence", [])]
+        return cls(
+            ranked_evidence=tuple(ev_list),
+            ranking_scores=data.get("ranking_scores", {}),
+            retrieval_metadata=data.get("retrieval_metadata", {}),
+            retrieval_confidence=float(data.get("retrieval_confidence", 0.0)),
+            retrieval_explanation=data.get("retrieval_explanation", {}),
         )
