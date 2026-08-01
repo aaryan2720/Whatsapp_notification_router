@@ -262,6 +262,69 @@ class ConversationContext:
 
 
 @dataclass(frozen=True, slots=True)
+class TextFeatures:
+    """
+    Extracted textual features from message text or OCR/transcript sources.
+    Used by the routing decision engine for heuristics and risk profiling.
+    """
+
+    is_urgency_indicated: bool = False
+    is_payment_indicated: bool = False
+    has_otp_pattern: bool = False
+    extracted_urls: tuple[str, ...] = field(default_factory=tuple)
+    extracted_domains: tuple[str, ...] = field(default_factory=tuple)
+    has_suspicious_link: bool = False
+    is_business_language: bool = False
+    is_greeting: bool = False
+    is_promotion: bool = False
+    is_scam_signal: bool = False
+    is_event_announcement: bool = False
+    has_forwarded_cues: bool = False
+    char_count: int = 0
+    word_count: int = 0
+    line_count: int = 0
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "is_urgency_indicated": self.is_urgency_indicated,
+            "is_payment_indicated": self.is_payment_indicated,
+            "has_otp_pattern": self.has_otp_pattern,
+            "extracted_urls": list(self.extracted_urls),
+            "extracted_domains": list(self.extracted_domains),
+            "has_suspicious_link": self.has_suspicious_link,
+            "is_business_language": self.is_business_language,
+            "is_greeting": self.is_greeting,
+            "is_promotion": self.is_promotion,
+            "is_scam_signal": self.is_scam_signal,
+            "is_event_announcement": self.is_event_announcement,
+            "has_forwarded_cues": self.has_forwarded_cues,
+            "char_count": self.char_count,
+            "word_count": self.word_count,
+            "line_count": self.line_count,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> TextFeatures:
+        return cls(
+            is_urgency_indicated=data.get("is_urgency_indicated", False),
+            is_payment_indicated=data.get("is_payment_indicated", False),
+            has_otp_pattern=data.get("has_otp_pattern", False),
+            extracted_urls=tuple(data.get("extracted_urls", [])),
+            extracted_domains=tuple(data.get("extracted_domains", [])),
+            has_suspicious_link=data.get("has_suspicious_link", False),
+            is_business_language=data.get("is_business_language", False),
+            is_greeting=data.get("is_greeting", False),
+            is_promotion=data.get("is_promotion", False),
+            is_scam_signal=data.get("is_scam_signal", False),
+            is_event_announcement=data.get("is_event_announcement", False),
+            has_forwarded_cues=data.get("has_forwarded_cues", False),
+            char_count=data.get("char_count", 0),
+            word_count=data.get("word_count", 0),
+            line_count=data.get("line_count", 0),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class RoutingFeatures:
     """
     Complete bundle of computed features passed into the Routing Decision Engine.
@@ -282,6 +345,7 @@ class RoutingFeatures:
     historical_reply_rate: float = 0.0
     historical_dismiss_rate: float = 0.0
     historical_report_rate: float = 0.0
+    text_features: TextFeatures | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -298,10 +362,13 @@ class RoutingFeatures:
             "historical_reply_rate": self.historical_reply_rate,
             "historical_dismiss_rate": self.historical_dismiss_rate,
             "historical_report_rate": self.historical_report_rate,
+            "text_features": self.text_features.to_dict() if self.text_features else None,
         }
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> RoutingFeatures:
+        tf_data = data.get("text_features")
+        tf = TextFeatures.from_dict(tf_data) if tf_data else None
         return cls(
             message=MessageRecord.from_row(data["message"]),
             user=UserContext.from_dict(data["user"]),
@@ -316,4 +383,5 @@ class RoutingFeatures:
             historical_reply_rate=data.get("historical_reply_rate", 0.0),
             historical_dismiss_rate=data.get("historical_dismiss_rate", 0.0),
             historical_report_rate=data.get("historical_report_rate", 0.0),
+            text_features=tf,
         )

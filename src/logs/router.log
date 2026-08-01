@@ -25,3 +25,6 @@
 2026-08-01T22:39:54 [ERROR] src.bootstrap — Missing required dataset file: C:\Users\aarya\AppData\Local\Temp\pytest-of-Aaryan27\pytest-9\test_bootstrap_missing_file_st0\nonexistent.csv
 2026-08-01T22:39:54 [ERROR] src.bootstrap — Missing required dataset file: C:\Users\aarya\AppData\Local\Temp\pytest-of-Aaryan27\pytest-9\test_bootstrap_missing_file_no0\nonexistent.csv
 2026-08-01T22:39:54 [WARNING] src.bootstrap — Non-strict mode: 1 missing dataset file(s) tolerated.
+2026-08-01T22:46:47 [ERROR] src.bootstrap — Missing required dataset file: C:\Users\aarya\AppData\Local\Temp\pytest-of-Aaryan27\pytest-10\test_bootstrap_missing_file_st0\nonexistent.csv
+2026-08-01T22:46:47 [ERROR] src.bootstrap — Missing required dataset file: C:\Users\aarya\AppData\Local\Temp\pytest-of-Aaryan27\pytest-10\test_bootstrap_missing_file_no0\nonexistent.csv
+2026-08-01T22:46:47 [WARNING] src.bootstrap — Non-strict mode: 1 missing dataset file(s) tolerated.
