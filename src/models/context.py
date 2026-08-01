@@ -63,6 +63,29 @@ class UserContext:
         else:  # Overnight window (e.g. 22:00 to 07:00)
             return current_time >= start_time or current_time <= end_time
 
+    @property
+    def reply_to_open_ratio(self) -> float:
+        """How likely the user is to reply once they open a message."""
+        if self.messages_opened_30d <= 0:
+            return 0.0
+        return self.messages_replied_30d / self.messages_opened_30d
+
+    @property
+    def notification_dismiss_rate(self) -> float:
+        """Proportion of notifications dismissed versus opened."""
+        total = self.messages_opened_30d + self.notifications_dismissed_30d
+        if total <= 0:
+            return 0.0
+        return self.notifications_dismissed_30d / total
+
+    @property
+    def report_tendency(self) -> float:
+        """Tendency to report messages (spam/scam)."""
+        total = self.messages_opened_30d + self.notifications_dismissed_30d
+        if total <= 0:
+            return 0.0
+        return self.messages_reported_30d / total
+
     def to_dict(self) -> dict[str, Any]:
         """Serialize to dict."""
         return {
