@@ -22,10 +22,19 @@ from src.utils.logging_utils import get_logger
 logger = get_logger(__name__)
 
 
+# Module-level cache to store computed averages per DatasetBundle instance id
+_GLOBAL_AVERAGES_CACHE: dict[int, dict[str, float]] = {}
+
+
 def _compute_global_averages(bundle: DatasetBundle) -> dict[str, float]:
     """
     Compute average user metrics over the entire dataset for fallback purposes.
+    Caches results by bundle ID to prevent redundant scans.
     """
+    bundle_id = id(bundle)
+    if bundle_id in _GLOBAL_AVERAGES_CACHE:
+        return _GLOBAL_AVERAGES_CACHE[bundle_id]
+
     users = bundle.users
     summaries = bundle.daily_notification_summary
 
@@ -46,7 +55,7 @@ def _compute_global_averages(bundle: DatasetBundle) -> dict[str, float]:
         avg_sent_daily = sum(s["notifications_sent"] for s in summaries) / len(summaries)
         avg_dismiss_daily = sum(s["notifications_dismissed"] for s in summaries) / len(summaries)
 
-    return {
+    averages = {
         "messages_opened_30d": avg_opened,
         "messages_replied_30d": avg_replied,
         "notifications_dismissed_30d": avg_dismissed,
@@ -54,6 +63,8 @@ def _compute_global_averages(bundle: DatasetBundle) -> dict[str, float]:
         "daily_avg_notifications_sent": avg_sent_daily,
         "daily_avg_notifications_dismissed": avg_dismiss_daily,
     }
+    _GLOBAL_AVERAGES_CACHE[bundle_id] = averages
+    return averages
 
 
 def build_user_context(user_id: str, bundle: DatasetBundle) -> UserContext:

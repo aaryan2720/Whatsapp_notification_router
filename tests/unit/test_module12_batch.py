@@ -110,8 +110,14 @@ class TestSubmissionValidatorFailures:
 
 
 class TestCliExecution:
-    def test_cli_runner(self) -> None:
+    def test_cli_runner(self, tmp_path: Path) -> None:
         main_path = _REPO_ROOT / "code" / "main.py"
-        res = subprocess.run([sys.executable, str(main_path)], capture_output=True, text=True)
+        test_out = tmp_path / "cli_test_output.csv"
+        res = subprocess.run(
+            [sys.executable, str(main_path), "--output", str(test_out)],
+            capture_output=True,
+            text=True,
+        )
         assert res.returncode == 0
         assert "completed successfully" in res.stderr or "completed successfully" in res.stdout
+        assert test_out.is_file()

@@ -28,10 +28,8 @@ def _tokenize(text: str) -> set[str]:
     return set(_WORD_RE.findall(text.lower()))
 
 
-def _compute_jaccard_similarity(text_a: str, text_b: str) -> float:
-    """Calculate Jaccard similarity between two texts."""
-    tokens_a = _tokenize(text_a)
-    tokens_b = _tokenize(text_b)
+def _compute_jaccard_tokens_similarity(tokens_a: set[str], tokens_b: set[str]) -> float:
+    """Calculate Jaccard similarity between two sets of tokens."""
     if not tokens_a and not tokens_b:
         return 0.0
     intersection = len(tokens_a & tokens_b)
@@ -54,6 +52,9 @@ def rank_candidates(
     ranked_results: list[tuple[dict[str, Any], float, str]] = []
     current_time = message.created_at or datetime.now()
 
+    # Pre-tokenize the target incoming message once
+    target_tokens = _tokenize(message.message_text)
+
     for cand in candidates:
         cand_id = cand["message_id"]
         cand_text = cand.get("message_text", "")
@@ -61,7 +62,8 @@ def rank_candidates(
         reason = cand.get("candidate_generation_reason", "unknown")
 
         # 1. Lexical Similarity (Jaccard)
-        lexical_score = _compute_jaccard_similarity(message.message_text, cand_text)
+        cand_tokens = _tokenize(cand_text)
+        lexical_score = _compute_jaccard_tokens_similarity(target_tokens, cand_tokens)
 
         # 2. Recency Decay (scale over 30 days)
         recency_decay = 1.0

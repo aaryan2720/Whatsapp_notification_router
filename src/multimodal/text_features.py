@@ -65,9 +65,8 @@ _KEYWORDS = {
 }
 
 
-def _matches_any_keyword(text: str, keywords: set[str]) -> bool:
+def _matches_any_keyword(lower_text: str, keywords: set[str]) -> bool:
     """Helper to check if any keyword exists in lowercased text."""
-    lower_text = text.lower()
     return any(kw in lower_text for kw in keywords)
 
 
@@ -80,6 +79,9 @@ def extract_text_features(text: str) -> TextFeatures:
     if not text:
         return TextFeatures()
 
+    # Pre-lowercase input text once
+    lower_text = text.lower()
+
     # 1. Lexical statistics
     char_count = len(text)
     words = text.split()
@@ -87,18 +89,18 @@ def extract_text_features(text: str) -> TextFeatures:
     line_count = text.count("\n") + 1 if text else 0
 
     # 2. Keyword matches
-    is_urg = _matches_any_keyword(text, _KEYWORDS["urgency"])
-    is_pay = _matches_any_keyword(text, _KEYWORDS["payment"])
-    is_biz = _matches_any_keyword(text, _KEYWORDS["business"])
-    is_greet = _matches_any_keyword(text, _KEYWORDS["greeting"])
-    is_promo = _matches_any_keyword(text, _KEYWORDS["promotion"])
-    is_scam = _matches_any_keyword(text, _KEYWORDS["scam"])
-    is_evt = _matches_any_keyword(text, _KEYWORDS["event"])
-    has_fwd = _matches_any_keyword(text, _KEYWORDS["forwarded"])
+    is_urg = _matches_any_keyword(lower_text, _KEYWORDS["urgency"])
+    is_pay = _matches_any_keyword(lower_text, _KEYWORDS["payment"])
+    is_biz = _matches_any_keyword(lower_text, _KEYWORDS["business"])
+    is_greet = _matches_any_keyword(lower_text, _KEYWORDS["greeting"])
+    is_promo = _matches_any_keyword(lower_text, _KEYWORDS["promotion"])
+    is_scam = _matches_any_keyword(lower_text, _KEYWORDS["scam"])
+    is_evt = _matches_any_keyword(lower_text, _KEYWORDS["event"])
+    has_fwd = _matches_any_keyword(lower_text, _KEYWORDS["forwarded"])
 
     # 3. OTP Detection
     has_otp = False
-    if _OTP_RE.search(text) and _matches_any_keyword(text, _KEYWORDS["otp"]):
+    if _OTP_RE.search(text) and _matches_any_keyword(lower_text, _KEYWORDS["otp"]):
         has_otp = True
 
     # 4. URL and Domain Extraction
