@@ -22,11 +22,10 @@ import os
 import sys
 
 # Ensure the package root is on the Python path when run as a script
-# from inside the code/ directory.
+# from inside the code/ directory, resolving from the self-contained code/src package.
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.dirname(_HERE)
-if _REPO_ROOT not in sys.path:
-    sys.path.insert(0, _REPO_ROOT)
+if _HERE not in sys.path:
+    sys.path.insert(0, _HERE)
 
 
 def _parse_args() -> argparse.Namespace:

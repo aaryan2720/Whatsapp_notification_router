@@ -6,6 +6,7 @@ __pycache__/
 
 # Pytest cache
 .pytest_cache/
+orchestrate_final_submission
 
 # Runtime logs (generated, not source)
 src/logs/*.log

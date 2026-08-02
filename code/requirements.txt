@@ -1,16 +1,13 @@
 # Message Notification Router — Python dependencies
 # Python 3.11+
 
-# Data handling
-pandas>=2.2.0,<3.0
-
 # Testing
 pytest>=8.0.0
 pytest-cov>=5.0.0
 
 # Image OCR (Module 8 — pytesseract wraps the Tesseract binary)
 # pytesseract>=0.3.10
-# Pillow>=10.0.0
+Pillow>=10.0.0
 
 # Voice ASR (Module 9 — choose one offline engine)
 # openai-whisper>=20231117      # offline GPU/CPU transcription
@@ -18,7 +15,3 @@ pytest-cov>=5.0.0
 
 # Optional: progress bar for batch runner (Module 12)
 # tqdm>=4.66.0
-
-# NOTE: OCR and ASR libraries are commented out until Module 8/9 to keep
-# the bootstrap dependency surface minimal. Uncomment when implementing
-# those modules.
