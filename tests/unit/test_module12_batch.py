@@ -111,7 +111,7 @@ class TestSubmissionValidatorFailures:
 
 class TestCliExecution:
     def test_cli_runner(self, tmp_path: Path) -> None:
-        main_path = _REPO_ROOT / "code" / "main.py"
+        main_path = _REPO_ROOT / "main.py"
         test_out = tmp_path / "cli_test_output.csv"
         res = subprocess.run(
             [sys.executable, str(main_path), "--output", str(test_out)],

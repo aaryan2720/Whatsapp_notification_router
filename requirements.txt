@@ -1,0 +1,15 @@
+# WhatsApp Message Notification Router — Dependencies
+# Python 3.11+
+
+# Testing & Coverage
+pytest>=8.0.0
+pytest-cov>=5.0.0
+
+# Multimodal Image processing
+Pillow>=10.0.0
+
+# Optional OCR / ASR native libraries
+# pytesseract>=0.3.10
+# openai-whisper>=20231117
+# faster-whisper>=1.0.0
+# tqdm>=4.66.0

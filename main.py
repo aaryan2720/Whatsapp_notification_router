@@ -1,18 +1,10 @@
 """
-code/main.py
-------------
-Entry point for the Message Notification Router submission package.
+main.py
+-------
+CLI launcher and orchestration entrypoint for the WhatsApp Message Notification Router.
 
-Usage
------
+Usage:
     python main.py [--dataset-dir PATH] [--output PATH] [--log-level LEVEL]
-
-This file is the single runnable entry point for the packaged submission.
-During development, the implementation lives in src/; this file acts as
-the launcher that delegates to src/pipeline/run_batch.py.
-
-Module 12 will complete the pipeline wiring. For now, this stub verifies
-that the bootstrap layer is functional.
 """
 
 from __future__ import annotations
@@ -20,17 +12,12 @@ from __future__ import annotations
 import argparse
 import os
 import sys
-
-# Ensure the package root is on the Python path when run as a script
-# from inside the code/ directory, resolving from the self-contained code/src package.
-_HERE = os.path.dirname(os.path.abspath(__file__))
-if _HERE not in sys.path:
-    sys.path.insert(0, _HERE)
+from pathlib import Path
 
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Message Notification Router — HackerRank Orchestrate"
+        description="WhatsApp Message Notification Router CLI"
     )
     parser.add_argument(
         "--dataset-dir",
@@ -54,24 +41,25 @@ def _parse_args() -> argparse.Namespace:
 def main() -> int:
     args = _parse_args()
 
-    # Apply environment overrides before importing config-dependent modules.
+    # Apply environment overrides before importing config-dependent modules
     if args.dataset_dir:
-        os.environ["ROUTER_REPO_ROOT"] = os.path.dirname(
-            os.path.abspath(args.dataset_dir)
+        os.environ["ROUTER_REPO_ROOT"] = str(
+            Path(args.dataset_dir).resolve().parent
         )
 
-    from src.bootstrap import bootstrap, BootstrapError
+    # Ensure the root is on path
+    _HERE = Path(__file__).resolve().parent
+    if str(_HERE) not in sys.path:
+        sys.path.insert(0, str(_HERE))
 
+    from src.bootstrap import bootstrap, BootstrapError
     try:
         bootstrap(strict=True, log_level=args.log_level)
     except BootstrapError as exc:
         print(f"[FATAL] {exc}", file=sys.stderr)
         return 1
 
-    # Run the full batch pipeline runner
     from src.pipeline.run_batch import run
-    
-    # Pass dataset_dir and output overrides if provided
     dataset_dir = os.path.abspath(args.dataset_dir) if args.dataset_dir else None
     output_path = os.path.abspath(args.output) if args.output else None
 

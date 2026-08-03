@@ -1,136 +1,131 @@
-# Architecture
+# System Architecture
 
-## Problem Overview
+The WhatsApp Message Notification Router is designed as a decoupled, top-down sequential pipeline to process incoming multimodal messages, resolve historical and relationship contexts, and determine routing priorities deterministically.
 
-The task is to build an AI-powered WhatsApp message notification router that assigns every incoming message to one of three actions:
+---
 
-- `notify`: interrupt the user now
-- `digest`: show later
-- `mute`: suppress as low-value, repetitive, unwanted, suspicious, or unsafe
+## 1. Overall System Architecture
 
-The system must reason over multimodal content, including text, images, and voice notes, while respecting user-specific preferences, conversation context, historical behavior, and business relationships.
-
-## Design Goals
-
-- Be deterministic and reproducible where possible.
-- Make routing personalized to each recipient.
-- Support multimodal input without depending on raw text only.
-- Produce evidence-backed decisions with useful explanations.
-- Keep the system modular so each component can be developed and tested independently.
-- Preserve strict output formatting for submission.
-- Avoid touching dataset files.
-
-## High-Level Architecture
-
-The system is organized into the following layers:
-
-1. Dataset ingestion and validation
-2. User context assembly
-3. Conversation context assembly
-4. Multimodal understanding
-5. Historical evidence retrieval
-6. Routing decision engine
-7. Reason and confidence generation
-8. Output writing
-9. Logging, caching, and configuration support
-
-### Component Interaction Diagram
+The system utilizes modular pipeline components, separating state ingestion, feature extraction, scoring, and output generation.
 
 ```mermaid
-flowchart LR
-    A[dataset/messages.csv] --> B[Ingestion and Validation]
-    C[users/groups/business/history tables] --> D[User Context]
-    C --> E[Conversation Context]
-    F[images.csv + media/images] --> G[Image Understanding]
-    H[voice_notes.csv + media/audio] --> I[Voice Understanding]
-    J[message_history.csv + message_events.csv] --> K[Evidence Retrieval]
-    B --> L[Routing Decision Engine]
-    D --> L
-    E --> L
-    G --> L
-    I --> L
-    K --> L
-    L --> M[Reason and Confidence Builder]
-    M --> N[output.csv Writer]
+graph TD
+    %% Source datasets
+    M_CSV["messages.csv"] --> Ingest["Loader & Schema Validator"]
+    U_CSV["users.csv"] --> Ingest
+    G_CSV["groups.csv"] --> Ingest
+    B_CSV["business_accounts.csv"] --> Ingest
+    
+    %% Processing layers
+    Ingest --> Bundle["Dataset Bundle (In-Memory Index)"]
+    Bundle --> UserCtx["User Context Builder"]
+    Bundle --> ConvCtx["Conversation Context Builder"]
+    Bundle --> Retrieval["Two-Stage Evidence Retriever"]
+    
+    %% Multimodal layer
+    M_CSV --> TextExt["Text Feature Extractor"]
+    M_CSV --> Media["Multimodal Media Pipeline"]
+    Media --> OCR["OCR Provider (Tesseract/Cache)"]
+    Media --> ASR["ASR Provider (Whisper/Cache)"]
+    
+    %% Scoring & presentation
+    UserCtx --> Scorer["Decision Fusion Scorer"]
+    ConvCtx --> Scorer
+    Retrieval --> Scorer
+    TextExt --> Scorer
+    OCR --> Scorer
+    ASR --> Scorer
+    
+    Scorer --> ScTrace["DecisionTrace & Scores"]
+    ScTrace --> Builder["Reason & Confidence Builder"]
+    Builder --> Output["CSV Writer & Output Validator"]
+    Output --> Out_CSV["output.csv"]
 ```
 
-## End-to-End Inference Pipeline
+---
 
-1. Load a row from `dataset/messages.csv`.
-2. Validate schema, normalize identifiers, and resolve media references.
-3. Build user-specific context from notification behavior, quiet hours, engagement history, and business relationships.
-4. Build conversation-specific context from group membership, sender identity, business verification, and trust signals.
-5. If the message is text-only, analyze the text directly.
-6. If the message includes an image, resolve the image path and extract OCR/visual cues.
-7. If the message includes a voice note, resolve the audio path and transcribe it.
-8. Merge all modality signals into a single feature bundle.
-9. Retrieve historical evidence from message history and message events.
-10. Score routing candidates and choose `notify`, `digest`, or `mute`.
-11. Assign the best-fit `message_type`.
-12. Generate a short human-readable reason and calibrated confidence.
-13. Emit `evidence_message_ids`.
-14. Write one row to `output.csv`.
-15. Repeat for every incoming message.
+## 2. Dynamic Data Flow
 
-## Data Flow
+For every processed message, data flows sequentially through isolation boundaries. Context builders and retrievers populate immutable models, leaving the decision fusion scorer completely stateless.
 
-### Primary Inputs
+```mermaid
+sequenceDiagram
+    autonumber
+    participant CLI as Launcher (main.py)
+    participant Loader as Ingest Loader
+    participant Context as Context Builders
+    participant Search as Retriever
+    participant Scorer as Decision Fusion Scorer
+    participant Formatter as Presentation Formatter
+    
+    CLI->>Loader: load_all_datasets()
+    Loader->>CLI: DatasetBundle (Indexed Tuple structures)
+    
+    loop for each message
+        CLI->>Context: build_user_context() & build_conversation_context()
+        Context->>CLI: UserContext & ConversationContext (Immutable)
+        
+        CLI->>Search: select_evidence()
+        Search->>CLI: EvidenceBundle (Deduplicated, Jaccard-ranked matches)
+        
+        CLI->>Scorer: route_message()
+        Note over Scorer: Executes sequential override matrix<br/>and priority scoring fusion.
+        Scorer->>CLI: Preliminary Prediction (DecisionScores, DecisionTrace)
+        
+        CLI->>Formatter: build_final_prediction()
+        Note over Formatter: Normalizes confidence (clamped [0.50, 1.00]),<br/>formats evidence IDs, maps templates.
+        Formatter->>CLI: Presentation Prediction
+    end
+    
+    CLI->>CLI: write_csv() & validate_submission()
+```
 
-- `dataset/messages.csv`
-- `dataset/users.csv`
-- `dataset/groups.csv`
-- `dataset/group_members.csv`
-- `dataset/business_accounts.csv`
-- `dataset/user_business_history.csv`
-- `dataset/message_history.csv`
-- `dataset/message_events.csv`
-- `dataset/images.csv`
-- `dataset/voice_notes.csv`
-- `dataset/daily_notification_summary.csv`
-- `dataset/sample_messages.csv`
+---
 
-### Media Inputs
+## 3. Decision Override Pipeline
 
-- `dataset/media/images/`
-- `dataset/media/audio/`
+Priorities and override rules are evaluated sequentially in step boundaries to bypass priority scoring for high-certainty indicators.
 
-### Derived Data
+```mermaid
+graph TD
+    Start["Evaluate Overrides (evaluate_decision_matrix)"] --> Phish{"Step 1: Phishing Score >= T.SCAM_HIGH?"}
+    
+    Phish -- Yes --> MutePhish["Action: mute <br/> Type: scam <br/> Override: Phishing Override"]
+    Phish -- No --> BizOpt{"Step 2: Business Opt-Out or Promo Block?"}
+    
+    BizOpt -- Yes --> MuteBiz["Action: mute <br/> Type: promotion <br/> Override: Business Opt-Out"]
+    BizOpt -- No --> OTP{"Step 3: OTP Verification Code present?"}
+    
+    OTP -- Yes --> NotifyOTP["Action: notify <br/> Type: urgent <br/> Override: OTP Bypass (DND Ignored)"]
+    OTP -- No --> GroupMute{"Step 4: Chat in Muted Group?"}
+    
+    GroupMute -- Yes --> CheckUrgent{"Urgency >= T.URGENCY_HIGH?"}
+    CheckUrgent -- No --> MuteGroup["Action: mute / digest <br/> Override: Muted Group"]
+    CheckUrgent -- Yes --> ActiveDND
+    
+    GroupMute -- No --> ActiveDND{"Step 5: Active DND (Quiet Hours)?"}
+    ActiveDND -- Yes --> CheckBypass{"Bypass Allowed? <br/> (Urgent personal contact)"}
+    CheckBypass -- No --> DigestDND["Action: digest / mute <br/> Override: Quiet Hours Override"]
+    CheckBypass -- Yes --> PriorityScore
+    
+    ActiveDND -- No --> PriorityScore["Step 6: Priority Score Fusion (Weighted)"]
+    
+    PriorityScore --> ScoreCheck{"Score >= T.FINAL_PRIORITY_NOTIFY?"}
+    ScoreCheck -- Yes --> Notify["Action: notify"]
+    ScoreCheck -- No --> DigestCheck{"Score >= T.FINAL_PRIORITY_DIGEST?"}
+    DigestCheck -- Yes --> Digest["Action: digest"]
+    DigestCheck -- No --> Mute["Action: mute"]
+```
 
-- User context features
-- Conversation context features
-- OCR and transcript features
-- Evidence rankings
-- Routing scores
-- Final output rows
+---
 
-## Cross-Cutting Concerns
+## 4. Module Interaction Overview
 
-### Logging
+Module boundaries isolate domains:
 
-Logging should capture startup, validation, retrieval, modality processing, scoring, and output-writing events. The shared development transcript is stored outside the repository at `%USERPROFILE%\\hackerrank_orchestrate_august26\\log.txt` on Windows.
-
-### Caching
-
-Cache expensive artifacts such as OCR results, ASR transcripts, and retrieval indexes. Caching should not affect determinism.
-
-### Configuration
-
-Centralize paths, thresholds, feature toggles, and runtime settings in configuration files under `src/configs`.
-
-### Testing
-
-Validate each module independently before integrating it into the full pipeline. Start with schema validation and context builders, then add retrieval, multimodal processing, scoring, and end-to-end output tests.
-
-### Error Handling
-
-Missing media, malformed rows, failed OCR, failed ASR, and sparse history should degrade gracefully rather than stop the batch.
-
-### Multimodal Processing
-
-Text processing, OCR, and voice transcription should happen before routing so the decision engine receives normalized features rather than raw media.
-
-## Notes
-
-- Implementation should remain deterministic unless a module explicitly requires AI assistance.
-- The final submission must write exactly one row per message in `dataset/messages.csv`.
-- No organizer-only files should be used.
+*   **Ingestion Layer (`src/loader/`)**: Loads CSV entries and validates data structures against column-level type maps. Coerces timestamps, formats, and handles RFC 4180 parsing.
+*   **Context Layer (`src/context/`)**: Computes DND windows, sender trusts, opt-ins, and group membership summaries, returning immutable dataclasses.
+*   **Retrieval Layer (`src/retrieval/`)**: Filters historical logs relative to receiving user identifiers and ranks candidate history via recency-decay Jaccard index similarity.
+*   **Multimodal Layer (`src/multimodal/`)**: Exposes OCR and ASR providers, falling back to offline ground-truth JSON files.
+*   **Scoring & Routing Engine (`src/routing/`)**: Runs overrides and calculates final scores.
+*   **Presentation Layer (`src/output/`)**: Formats predictions and runs the final `SubmissionValidator`.
